@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Posts = require('../models/posts');
 
+console.log(mongoose.Types.ObjectId.isValid('6297da3947e2a2997df59a54'));
+
 const router = express.Router();
 
 // Save Posts
@@ -55,7 +57,7 @@ router.put('/post/update/:id', (req, res) => {
 });
 
 // Delete Posts
-router.delete('./post/delete/:id', (req, res) => {
+router.delete('/post/delete/:id', (req, res) => {
    Posts.findByIdAndRemove(req.params.id).exec((err, deletedPost) => {
       if (err) {
          return res.status(400).json({
