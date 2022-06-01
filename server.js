@@ -10,6 +10,7 @@ const postRoutes = require('./routes/posts');
 // App middleware
 app.use(bodyparser.json());
 
+// Route middleware
 app.use(postRoutes);
 
 const port = 8000;
