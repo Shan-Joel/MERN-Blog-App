@@ -3,3 +3,11 @@
 body {
    font-family: 'Poppins', sans-serif;
 }
+
+.container-cus {
+   max-width: 1140px !important;
+}
+
+.bg-light {
+   background-color: #faffd0 !important;
+}

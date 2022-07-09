@@ -1,69 +1,24 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import CreatePost from './components/CreatePost';
+import EditPost from './components/EditPost';
+import PostDetails from './components/PostDetails';
+import Navbar from './components/Navbar';
 
-class App extends Component {
-   constructor(props) {
-      super(props);
-
-      this.state = {
-         posts: [],
-      };
-   }
-
-   componentDidMount() {
-      this.retrievePosts();
-   }
-
-   retrievePosts() {
-      axios.get('http://localhost:8000/posts').then((res) => {
-         if (res.data.success) {
-            this.setState({
-               posts: res.data.existingPosts,
-            });
-
-            console.log(this.state.posts);
-         }
-      });
-   }
-
-   render() {
-      return (
-         <div className="container-md mt-4">
-            <h3 className="mb-3 text-primary fw-bold">All Posts</h3>
-            <table class="table">
-               <thead>
-                  <tr>
-                     <th scope="col">#</th>
-                     <th scope="col">Topic</th>
-                     <th scope="col">Description</th>
-                     <th scope="col">Post Category</th>
-                     <th scope="col">Action</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {this.state.posts.map((posts, index) => (
-                     <tr>
-                        <td scope="row">{index + 1}</td>
-                        <td scope="row">{posts.topic}</td>
-                        <td scope="row">{posts.description}</td>
-                        <td scope="row">{posts.postCategory}</td>
-                        <td scope="row">
-                           <a className="btn btn-warning" href="#">
-                              <i className="fas fa-edit"></i>&nbsp;Edit
-                           </a>
-                           &nbsp;
-                           <a className="btn btn-danger" href="#">
-                              <i className="fas fa-trash-alt"></i>&nbsp;Delete
-                           </a>
-                        </td>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
+const App = () => {
+   return (
+      <BrowserRouter>
+         <Navbar />
+         <div className="container">
+            <Routes>
+               <Route path="/" exact element={<Home />} />
+               <Route path="/add-post" component={<CreatePost />} />
+               <Route path="/edit-post/:id" component={<EditPost />} />
+               <Route path="/post-details/:id" component={<PostDetails />} />
+            </Routes>
          </div>
-      );
-   }
-}
+      </BrowserRouter>
+   );
+};
 
 export default App;
