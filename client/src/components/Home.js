@@ -27,10 +27,35 @@ class Home extends Component {
       });
    }
 
+   onDelete = (id) => {
+      axios.delete(`/post/delete/${id}`).then((res) => {
+         alert('Post deleted successfully');
+
+         this.retrievePosts();
+      });
+   };
+
+   filterData = (posts, searchKey) => {
+      const result = posts.filter((post) => post.topic.toLowerCase().includes(searchKey) || post.description.toLowerCase().includes(searchKey) || post.postCategory.toLowerCase().includes(searchKey));
+      this.setState({ posts: result });
+   };
+
+   handleSearchArea = (e) => {
+      const searchKey = e.currentTarget.value;
+      axios.get('/posts').then((res) => {
+         if (res.data.success) {
+            this.filterData(res.data.existingPosts, searchKey);
+         }
+      });
+   };
+
    render() {
       return (
          <div className="container-md mt-4">
             <h3 className="mb-3 text-primary fw-bold">All Posts</h3>
+            <div className="col-lg-4 mt-2 mb-4 mx-auto">
+               <input type="search" className="form-control" placeholder="Search..." name="searchQuery" onChange={this.handleSearchArea} />
+            </div>
             <table className="table">
                <thead>
                   <tr>
@@ -53,11 +78,11 @@ class Home extends Component {
                         <td scope="row">{posts.description}</td>
                         <td scope="row">{posts.postCategory}</td>
                         <td scope="row">
-                           <a className="btn btn-warning" href="#">
+                           <a className="btn btn-warning" href={`/edit-post/${posts._id}`}>
                               <i className="fas fa-edit"></i>&nbsp;Edit
                            </a>
                            &nbsp;
-                           <a className="btn btn-danger" href="#">
+                           <a className="btn btn-danger" onClick={() => this.onDelete(posts._id)}>
                               <i className="fas fa-trash-alt"></i>&nbsp;Delete
                            </a>
                         </td>
