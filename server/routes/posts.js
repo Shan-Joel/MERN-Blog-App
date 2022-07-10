@@ -72,7 +72,7 @@ router.delete('/post/delete/:id', (req, res) => {
 });
 
 // Get Details for a Specific Post
-router.get('/posts/:id', (req, res) => {
+router.get('/post-details/:id', (req, res) => {
    let postId = req.params.id;
    Posts.findById(postId, (err, post) => {
       if (err) {

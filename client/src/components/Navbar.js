@@ -1,9 +1,9 @@
 const Navbar = () => {
    return (
-      <nav class="navbar  navbar-light bg-light">
-         <div class="container px-4">
-            <span class="navbar-brand mb-0 h1 fw-bold text-dark" style={{ fontSize: '30px', margin: '0 auto', textAlign: 'center' }}>
-               Navbar
+      <nav className="navbar  navbar-light bg-light">
+         <div className="container px-4">
+            <span className="navbar-brand mb-0 h1 fw-bold text-dark" style={{ fontSize: '30px', margin: '0 auto', textAlign: 'center' }}>
+               MERN Blog
             </span>
          </div>
       </nav>

@@ -16,7 +16,7 @@ class Home extends Component {
    }
 
    retrievePosts() {
-      axios.get('http://localhost:8000/posts').then((res) => {
+      axios.get('/posts').then((res) => {
          if (res.data.success) {
             this.setState({
                posts: res.data.existingPosts,
@@ -31,7 +31,7 @@ class Home extends Component {
       return (
          <div className="container-md mt-4">
             <h3 className="mb-3 text-primary fw-bold">All Posts</h3>
-            <table class="table">
+            <table className="table">
                <thead>
                   <tr>
                      <th scope="col">#</th>
@@ -43,10 +43,10 @@ class Home extends Component {
                </thead>
                <tbody>
                   {this.state.posts.map((posts, index) => (
-                     <tr>
+                     <tr key={index}>
                         <td scope="row">{index + 1}</td>
                         <td scope="row">
-                           <a href={`/post-details/${posts.id}`} style={{ textDecoration: 'none' }}>
+                           <a href={`/post-details/${posts._id}`} style={{ textDecoration: 'none' }}>
                               {posts.topic}
                            </a>
                         </td>
